@@ -1,0 +1,488 @@
+// ============================================================
+// StatusNeo × Wren AI — futuristic black / yellow overrides
+// ============================================================
+@sn-yellow: #ffd600;
+@sn-yellow-soft: rgba(255, 214, 0, 0.14);
+@sn-glow: 0 0 18px rgba(255, 214, 0, 0.35);
+
+::selection {
+  background: @sn-yellow;
+  color: #000;
+}
+
+body {
+  font-family: @font-family;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(255, 214, 0, 0.07), transparent 60%),
+    #050505;
+}
+
+code,
+pre,
+.ace_editor,
+.ant-typography code,
+kbd {
+  font-family: @code-family !important;
+}
+
+// ---------- scrollbars
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2c2c2c;
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: @sn-yellow;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// ---------- layout
+.ant-layout,
+.ant-layout-content {
+  background: transparent;
+}
+.adm-main {
+  background: transparent !important;
+}
+.ant-layout-sider {
+  background: #0a0a0a !important;
+  border-right: 1px solid #1e1e1e;
+}
+.ant-layout-sider .ant-layout-sider-children {
+  background: transparent;
+}
+
+// ---------- buttons
+.ant-btn {
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+.ant-btn-primary {
+  color: #000 !important;
+  font-weight: 700;
+  border-color: @sn-yellow;
+  background: @sn-yellow;
+  text-shadow: none;
+  box-shadow: 0 0 0 rgba(255, 214, 0, 0);
+  &:hover,
+  &:focus {
+    background: #ffe55c;
+    border-color: #ffe55c;
+    box-shadow: @sn-glow;
+  }
+  &:active {
+    background: #e6bf00;
+    border-color: #e6bf00;
+  }
+  &[disabled],
+  &[disabled]:hover {
+    color: rgba(255, 255, 255, 0.3) !important;
+    background: #141414;
+    border-color: #262626;
+    box-shadow: none;
+  }
+}
+.ant-btn-default,
+.ant-btn:not(.ant-btn-primary):not(.ant-btn-link):not(.ant-btn-text):not(.ant-btn-dangerous) {
+  color: #ededed;
+  background: transparent;
+  border-color: #3a3a3a;
+  &:hover,
+  &:focus {
+    color: @sn-yellow;
+    border-color: @sn-yellow;
+    background: rgba(255, 214, 0, 0.05);
+    box-shadow: 0 0 12px rgba(255, 214, 0, 0.15);
+  }
+  &[disabled] {
+    color: rgba(255, 255, 255, 0.25);
+    border-color: #262626;
+    background: #101010;
+  }
+}
+.ant-btn-link {
+  color: @sn-yellow;
+  &:hover {
+    color: #ffe55c;
+  }
+}
+.ant-btn-text:hover {
+  background: rgba(255, 214, 0, 0.08);
+  color: @sn-yellow;
+}
+.ant-btn-dangerous {
+  background: transparent;
+  &:hover {
+    box-shadow: 0 0 12px rgba(255, 77, 79, 0.3);
+  }
+}
+.ant-btn-dangerous.ant-btn-primary {
+  color: #fff !important;
+  background: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+// ---------- inputs
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-number,
+.ant-input-number-input,
+.ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-picker {
+  background: #0a0a0a !important;
+  border-color: #2c2c2c;
+  color: #ededed;
+  border-radius: 2px;
+}
+.ant-input:hover,
+.ant-input-affix-wrapper:hover,
+.ant-input-number:hover,
+.ant-picker:hover,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #8f7400 !important;
+}
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-affix-wrapper-focused,
+.ant-input-number-focused,
+.ant-picker-focused,
+.ant-select-focused:not(.ant-select-disabled) .ant-select-selector {
+  border-color: @sn-yellow !important;
+  box-shadow: 0 0 0 2px rgba(255, 214, 0, 0.15) !important;
+}
+.ant-input-disabled,
+.ant-input[disabled],
+.ant-select-disabled .ant-select-selector {
+  background: #141414 !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+.ant-select-dropdown,
+.ant-dropdown-menu,
+.ant-picker-dropdown .ant-picker-panel-container,
+.ant-popover-inner,
+.ant-popover-inner-content {
+  background: #141414;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+}
+.ant-popover-arrow-content::before {
+  background: #141414;
+}
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-submenu-title:hover,
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: rgba(255, 214, 0, 0.08);
+}
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: rgba(255, 214, 0, 0.14);
+  color: @sn-yellow;
+  font-weight: 600;
+}
+.ant-checkbox-inner,
+.ant-radio-inner {
+  background: transparent;
+  border-color: #4a4a4a;
+}
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-radio-checked .ant-radio-inner {
+  background: @sn-yellow;
+  border-color: @sn-yellow;
+}
+.ant-radio-checked .ant-radio-inner::after {
+  background: #000;
+}
+.ant-switch {
+  background: #3a3a3a;
+}
+.ant-switch-checked {
+  background: @sn-yellow;
+  .ant-switch-handle::before {
+    background: #000;
+  }
+}
+.ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+// ---------- modals / drawers
+.ant-modal-content,
+.ant-drawer-content {
+  background: #0d0d0d;
+  border: 1px solid #262626;
+  border-top: 2px solid @sn-yellow;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 214, 0, 0.06);
+  border-radius: 2px;
+}
+.ant-modal-header,
+.ant-drawer-header {
+  background: transparent;
+  border-bottom: 1px solid #1e1e1e;
+}
+.ant-modal-title,
+.ant-drawer-title,
+.ant-modal-close,
+.ant-drawer-close {
+  color: #fff;
+}
+.ant-modal-footer {
+  border-top: 1px solid #1e1e1e;
+}
+.ant-modal-confirm-body .ant-modal-confirm-title,
+.ant-modal-confirm-content {
+  color: #ededed;
+}
+
+// ---------- tables / cards / tabs / collapse
+.ant-table {
+  background: transparent;
+  color: #ededed;
+  border: 1px solid #1e1e1e;
+}
+.ant-table-thead > tr > th {
+  background: #111;
+  color: @sn-yellow;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #262626;
+}
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #1a1a1a;
+}
+.ant-table-tbody > tr.ant-table-row:hover > td,
+.ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: rgba(255, 214, 0, 0.05);
+}
+.ant-card {
+  background: #0d0d0d;
+  border-color: #262626;
+  color: #ededed;
+}
+.ant-card-head {
+  border-bottom-color: #1e1e1e;
+  color: #fff;
+}
+.ant-tabs-tab {
+  color: #a8a8a8;
+}
+.ant-tabs-tab:hover,
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: @sn-yellow !important;
+}
+.ant-tabs-ink-bar {
+  background: @sn-yellow;
+  box-shadow: 0 0 10px rgba(255, 214, 0, 0.6);
+}
+.ant-collapse,
+.ant-collapse > .ant-collapse-item,
+.ant-collapse-content {
+  background: #0d0d0d;
+  border-color: #1e1e1e;
+  color: #ededed;
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  color: #ededed;
+}
+.ant-tag {
+  border-radius: 2px;
+}
+.ant-divider {
+  border-color: #1e1e1e;
+}
+.ant-empty-description,
+.ant-empty-normal {
+  color: #8c8c8c;
+}
+.ant-tooltip-inner {
+  background: #1a1a1a;
+  color: @sn-yellow;
+  border: 1px solid #3a3a3a;
+  border-radius: 2px;
+}
+.ant-tooltip-arrow-content {
+  --antd-arrow-background-color: #1a1a1a;
+  background: #1a1a1a;
+}
+.ant-steps-item-title,
+.ant-steps-item-description {
+  color: #a8a8a8 !important;
+}
+.ant-steps-item-process .ant-steps-item-title,
+.ant-steps-item-finish .ant-steps-item-title {
+  color: #fff !important;
+}
+.ant-steps-item-process .ant-steps-item-icon {
+  background: @sn-yellow;
+  border-color: @sn-yellow;
+  .ant-steps-icon {
+    color: #000;
+  }
+}
+.ant-message-notice-content,
+.ant-notification-notice {
+  background: #141414;
+  border: 1px solid #2c2c2c;
+  color: #ededed;
+}
+.ant-alert {
+  background: #111;
+}
+.ant-alert-info {
+  border-color: rgba(255, 214, 0, 0.35);
+  background: rgba(255, 214, 0, 0.06);
+}
+.ant-spin-dot-item {
+  background-color: @sn-yellow;
+}
+.ant-spin-text,
+.ant-spin {
+  color: @sn-yellow;
+}
+.ant-skeleton-content .ant-skeleton-title,
+.ant-skeleton-paragraph > li {
+  background: linear-gradient(90deg, #141414 25%, #1f1f1f 37%, #141414 63%);
+  background-size: 400% 100%;
+}
+.ant-menu {
+  background: transparent;
+  color: #cfcfcf;
+}
+.ant-menu-item-selected {
+  color: @sn-yellow !important;
+}
+.ant-pagination-item a,
+.ant-pagination-prev button,
+.ant-pagination-next button {
+  color: #cfcfcf;
+}
+.ant-pagination-item-active {
+  border-color: @sn-yellow;
+  a {
+    color: @sn-yellow;
+  }
+}
+.ant-typography,
+h1.ant-typography,
+h2.ant-typography,
+h3.ant-typography,
+h4.ant-typography,
+h5.ant-typography {
+  color: inherit;
+}
+.ant-typography a,
+a {
+  color: @sn-yellow;
+  &:hover {
+    color: #ffe55c;
+  }
+}
+.ant-breadcrumb,
+.ant-breadcrumb a {
+  color: #a8a8a8;
+}
+
+// ---------- hero typography inside app (e.g. setup titles)
+h1.ant-typography {
+  letter-spacing: -0.02em;
+}
+
+// ---------- code / ace / sql
+.ace_editor,
+.ace-tomorrow,
+.ace_gutter {
+  background: #0a0a0a !important;
+  color: #ededed !important;
+}
+.ace_gutter {
+  color: #6b6b6b !important;
+}
+.ace_gutter-active-line,
+.ace_marker-layer .ace_active-line {
+  background: rgba(255, 214, 0, 0.06) !important;
+}
+.ace_cursor {
+  color: @sn-yellow !important;
+}
+.ace_marker-layer .ace_selection {
+  background: rgba(255, 214, 0, 0.25) !important;
+}
+.ace_keyword {
+  color: @sn-yellow !important;
+}
+.ace_string {
+  color: #8affc1 !important;
+}
+.ace_constant.ace_numeric {
+  color: #ff9f43 !important;
+}
+.ace_comment {
+  color: #5c5c5c !important;
+}
+.ace_identifier {
+  color: #ededed;
+}
+.ace_placeholder {
+  color: #5c5c5c;
+}
+
+// ---------- react-flow diagram (modeling)
+.react-flow {
+  background: #050505;
+  background-image:
+    linear-gradient(rgba(255, 214, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 214, 0, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.react-flow__controls-button {
+  background: #141414;
+  border-bottom: 1px solid #2c2c2c;
+  fill: #ededed;
+  &:hover {
+    background: #1f1a00;
+  }
+}
+.react-flow__minimap {
+  background: #0d0d0d;
+}
+.react-flow__edge-path {
+  stroke: #8f7400;
+}
+.react-flow__attribution {
+  background: transparent;
+}
+
+// ---------- utilities
+.sn-glow-text {
+  color: @sn-yellow;
+  text-shadow: 0 0 14px rgba(255, 214, 0, 0.45);
+}
+.sn-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 214, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 214, 0, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.sn-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: 1px solid rgba(255, 214, 0, 0.4);
+  color: @sn-yellow;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: @code-family;
+}

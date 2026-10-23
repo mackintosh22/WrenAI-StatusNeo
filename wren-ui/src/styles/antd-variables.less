@@ -1,0 +1,205 @@
+// Using in appendData, only for variables defination
+@import '~antd/lib/style/themes/default.less';
+
+@prefix: adm;
+
+// -------- Colors
+// >> Secondary
+@citrus-base: #f58433;
+@citrus-1: #fff9f0;
+@citrus-2: #ffedd9;
+@citrus-3: #ffd9b0;
+@citrus-4: #ffc187;
+@citrus-5: #ffa75e;
+@citrus-6: @citrus-base;
+@citrus-7: #cf6421;
+@citrus-8: #a84713;
+@citrus-9: #822f08;
+@citrus-10: #5c1d05;
+
+// >> Neutral
+@gray-1: #0a0a0a;
+@gray-2: #0f0f0f;
+@gray-3: #141414;
+@gray-4: #1e1e1e;
+@gray-5: #2c2c2c;
+@gray-6: #4a4a4a;
+@gray-7: #8c8c8c;
+@gray-8: #a8a8a8;
+@gray-9: #cfcfcf;
+@gray-10: #ededed;
+@gray-11: #f5f5f5;
+@gray-12: #fafafa;
+@gray-13: #ffffff;
+
+@preset-colors: pink, magenta, red, volcano, orange, yellow, gold, cyan, lime,
+  green, blue, geekblue, purple, citrus, gray;
+
+@black: #000;
+@white: #fff;
+
+// >> StatusNeo yellow (replaces geekblue everywhere via CSS variables)
+@geekblue-1: #1f1a00;
+@geekblue-2: #2e2600;
+@geekblue-3: #4a3d00;
+@geekblue-4: #6b5900;
+@geekblue-5: #ffe55c;
+@geekblue-6: #ffd600;
+@geekblue-7: #e6bf00;
+@geekblue-8: #b39500;
+@geekblue-9: #806b00;
+@geekblue-10: #4d4000;
+
+// >> StatusNeo dark surfaces
+@sn-bg: #050505;
+@sn-surface: #0d0d0d;
+@sn-surface-2: #141414;
+@sn-border: #262626;
+@sn-yellow: #ffd600;
+
+@primary-color: #ffd600;
+@info-color: #ffd600;
+@link-color: #ffd600;
+@link-hover-color: #ffe55c;
+@link-active-color: #e6bf00;
+@body-background: @sn-bg;
+@component-background: @sn-surface;
+@popover-background: @sn-surface-2;
+@popover-bg: @sn-surface-2;
+@border-color-base: @sn-border;
+@border-color-split: #1c1c1c;
+@border-color-inverse: #000;
+@text-color-secondary: rgba(255, 255, 255, 0.55);
+@text-color-inverse: #000;
+@item-hover-bg: rgba(255, 214, 0, 0.08);
+@item-active-bg: rgba(255, 214, 0, 0.14);
+@background-color-light: #141414;
+@background-color-base: #1a1a1a;
+@input-bg: #0a0a0a;
+@input-placeholder-color: #6b6b6b;
+@input-icon-color: #8c8c8c;
+@input-border-color: #2c2c2c;
+@input-disabled-bg: #141414;
+@btn-primary-color: #000;
+@btn-primary-bg: #ffd600;
+@btn-default-bg: transparent;
+@btn-default-color: #ededed;
+@btn-default-border: #3a3a3a;
+@btn-disable-bg: #141414;
+@btn-disable-border: #262626;
+@btn-shadow: none;
+@btn-primary-shadow: 0 0 14px rgba(255, 214, 0, 0.35);
+@primary-1: #1f1a00;
+@primary-2: #2e2600;
+@primary-3: #4a3d00;
+@primary-4: #6b5900;
+@primary-5: #ffe55c;
+@primary-6: #ffd600;
+@primary-7: #e6bf00;
+@primary-8: #b39500;
+@primary-9: #806b00;
+@primary-10: #4d4000;
+@outline-color: #ffd600;
+@shadow-color: rgba(0, 0, 0, 0.6);
+@shadow-1-up: 0 -6px 16px -8px rgba(0, 0, 0, 0.8);
+@shadow-1-down: 0 6px 16px -8px rgba(0, 0, 0, 0.8);
+@shadow-2: 0 6px 24px rgba(0, 0, 0, 0.7);
+@table-header-bg: #111;
+@table-header-color: #ededed;
+@table-row-hover-bg: #141414;
+@table-selected-row-bg: #1f1a00;
+@table-expanded-row-bg: #0f0f0f;
+@table-border-color: #1e1e1e;
+@modal-header-bg: #0d0d0d;
+@modal-content-bg: #0d0d0d;
+@modal-footer-bg: transparent;
+@modal-mask-bg: rgba(0, 0, 0, 0.75);
+@drawer-bg: #0d0d0d;
+@select-item-selected-bg: rgba(255, 214, 0, 0.12);
+@select-item-active-bg: rgba(255, 214, 0, 0.06);
+@select-dropdown-bg: #141414;
+@menu-bg: transparent;
+@menu-item-active-bg: rgba(255, 214, 0, 0.12);
+@menu-highlight-color: #ffd600;
+@menu-item-color: #cfcfcf;
+@menu-popup-bg: #141414;
+@tabs-card-head-background: #111;
+@tabs-ink-bar-color: #ffd600;
+@tabs-highlight-color: #ffd600;
+@tabs-hover-color: #ffe55c;
+@tabs-active-color: #e6bf00;
+@tag-default-bg: #1a1a1a;
+@tag-default-color: #cfcfcf;
+@pagination-item-bg: transparent;
+@pagination-item-bg-active: transparent;
+@switch-color: #ffd600;
+@checkbox-color: #ffd600;
+@checkbox-check-color: #000;
+@radio-dot-color: #ffd600;
+@radio-button-checked-bg: transparent;
+@radio-solid-checked-color: #000;
+@slider-rail-background-color: #262626;
+@slider-track-background-color: #8f7400;
+@progress-remaining-color: #1e1e1e;
+@collapse-header-bg: #111;
+@collapse-content-bg: #0d0d0d;
+@alert-info-bg-color: rgba(255, 214, 0, 0.08);
+@alert-info-border-color: rgba(255, 214, 0, 0.3);
+@steps-nav-arrow-color: #3a3a3a;
+@skeleton-color: rgba(255, 255, 255, 0.06);
+@picker-basic-cell-hover-color: #1f1a00;
+@picker-basic-cell-active-with-range-color: #2e2600;
+@divider-color: rgba(255, 255, 255, 0.1);
+@card-actions-background: #0d0d0d;
+@descriptions-bg: #111;
+@calendar-bg: #0d0d0d;
+@calendar-full-bg: #0d0d0d;
+
+@text-color: rgba(255, 255, 255, 0.88);
+@heading-color: #ffffff;
+@success-color: @green-6;
+@warning-color: @gold-6;
+@error-color: @red-5;
+@disabled-color: rgba(255, 255, 255, 0.28);
+
+// Functions
+.make-color-variables(@i: length(@preset-colors)) when (@i > 0) {
+  .make-color-variables(@i - 1);
+  @color: extract(@preset-colors, @i);
+  each(range(1, 10, 1), {
+    @colorVar: '@{color}-@{index}';
+    --@{color}-@{index}: @@colorVar;
+  });
+}
+
+// Header
+@layout-header-height: 20px;
+
+// Components
+@layout-body-background: #050505;
+@layout-header-background: #000;
+@layout-sider-background: #0a0a0a;
+@layout-trigger-background: #141414;
+
+@card-background: #0d0d0d;
+@breadcrumb-last-item-color: @text-color;
+@table-padding-vertical: 12px;
+@table-header-cell-split-color: transparent;
+@border-radius-base: 4px;
+
+// Typography
+@typography-title-font-weight: 700;
+@heading-1-size: ceil(@font-size-base * 2.85);
+// @heading-2-size: ceil(@font-size-base * 2.14);
+// @heading-3-size: ceil(@font-size-base * 1.71);
+// @heading-4-size: ceil(@font-size-base * 1.42);
+// @heading-5-size: ceil(@font-size-base * 1.14);
+
+// Avatar
+@avatar-size-xs: 16px;
+@avatar-font-size-xs: 12px;
+
+@tooltip-bg: #1a1a1a;
+@tooltip-color: #ffd600;
+@font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+@code-family: "JetBrains Mono", "Fira Code", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;

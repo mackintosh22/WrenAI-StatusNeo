@@ -1,0 +1,134 @@
+# ---------------------------------------------------------------------------
+# StatusNeo × Wren AI — local stack
+#
+# * Wren UI (landing page + workspace) is BUILT FROM SOURCE (../wren-ui).
+#   It does NOT use the pre-published ghcr.io/canner/wren-ui image.
+# * Engine, ibis-server, AI service and Qdrant use the upstream images
+#   (pinned through the *_VERSION variables).
+#
+# Every variable has a default, so the file works even without a .env file.
+# Recommended entry point:  ./run.sh   (see README section "Quick start")
+# ---------------------------------------------------------------------------
+name: ${COMPOSE_PROJECT_NAME:-statusneo-wren}
+
+volumes:
+  data:
+
+networks:
+  wren:
+    driver: bridge
+
+services:
+  bootstrap:
+    image: ghcr.io/canner/wren-bootstrap:${WREN_BOOTSTRAP_VERSION:-0.1.5}
+    restart: on-failure
+    platform: ${PLATFORM:-linux/amd64}
+    environment:
+      DATA_PATH: /app/data
+    volumes:
+      - data:/app/data
+    command: /bin/sh /app/init.sh
+
+  wren-engine:
+    image: ghcr.io/canner/wren-engine:${WREN_ENGINE_VERSION:-0.22.0}
+    restart: on-failure
+    platform: ${PLATFORM:-linux/amd64}
+    expose:
+      - ${WREN_ENGINE_PORT:-8080}
+      - ${WREN_ENGINE_SQL_PORT:-7432}
+    volumes:
+      - data:/usr/src/app/etc
+      - ${PROJECT_DIR:-.}/data:/usr/src/app/data
+    networks:
+      - wren
+    depends_on:
+      - bootstrap
+
+  ibis-server:
+    image: ghcr.io/canner/wren-engine-ibis:${IBIS_SERVER_VERSION:-0.22.0}
+    restart: on-failure
+    platform: ${PLATFORM:-linux/amd64}
+    expose:
+      - ${IBIS_SERVER_PORT:-8000}
+    environment:
+      WREN_ENGINE_ENDPOINT: http://wren-engine:${WREN_ENGINE_PORT:-8080}
+    volumes:
+      - ${LOCAL_STORAGE:-.}:/usr/src/app/data
+    networks:
+      - wren
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.0
+    restart: on-failure
+    expose:
+      - 6333
+      - 6334
+    volumes:
+      - data:/qdrant/storage
+    networks:
+      - wren
+
+  wren-ai-service:
+    image: ghcr.io/canner/wren-ai-service:${WREN_AI_SERVICE_VERSION:-0.29.3}
+    restart: on-failure
+    platform: ${PLATFORM:-linux/amd64}
+    expose:
+      - ${WREN_AI_SERVICE_PORT:-5555}
+    ports:
+      - ${AI_SERVICE_FORWARD_PORT:-5555}:${WREN_AI_SERVICE_PORT:-5555}
+    environment:
+      PYTHONUNBUFFERED: 1
+      CONFIG_PATH: /app/config.yaml
+      QDRANT_HOST: qdrant
+      SHOULD_FORCE_DEPLOY: ${SHOULD_FORCE_DEPLOY:-1}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      WREN_UI_ENDPOINT: http://wren-ui:${WREN_UI_PORT:-3000}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+    volumes:
+      - ${PROJECT_DIR:-.}/config.yaml:/app/config.yaml:ro
+      - ${PROJECT_DIR:-.}/data:/app/data:ro
+    networks:
+      - wren
+    depends_on:
+      - qdrant
+
+  # ---- Wren UI: built from local source (landing page + StatusNeo theme) ----
+  wren-ui:
+    build:
+      context: ../wren-ui
+      dockerfile: Dockerfile
+    image: statusneo/wren-ui:local
+    restart: on-failure
+    platform: ${PLATFORM:-linux/amd64}
+    environment:
+      DB_TYPE: sqlite
+      SQLITE_FILE: /app/data/db.sqlite3
+      WREN_ENGINE_ENDPOINT: http://wren-engine:${WREN_ENGINE_PORT:-8080}
+      WREN_AI_ENDPOINT: http://wren-ai-service:${WREN_AI_SERVICE_PORT:-5555}
+      IBIS_SERVER_ENDPOINT: http://ibis-server:${IBIS_SERVER_PORT:-8000}
+      GENERATION_MODEL: ${GENERATION_MODEL:-gpt-4.1-nano}
+      WREN_ENGINE_PORT: ${WREN_ENGINE_PORT:-8080}
+      WREN_AI_SERVICE_VERSION: ${WREN_AI_SERVICE_VERSION:-0.29.3}
+      WREN_UI_VERSION: ${WREN_UI_VERSION:-0.32.3}
+      WREN_ENGINE_VERSION: ${WREN_ENGINE_VERSION:-0.22.0}
+      WREN_PRODUCT_VERSION: ${WREN_PRODUCT_VERSION:-0.29.2}
+      EXPERIMENTAL_ENGINE_RUST_VERSION: ${EXPERIMENTAL_ENGINE_RUST_VERSION:-false}
+      # telemetry (disabled by default for local runs)
+      TELEMETRY_ENABLED: ${TELEMETRY_ENABLED:-false}
+      USER_UUID: ${USER_UUID:-}
+      POSTHOG_API_KEY: ${POSTHOG_API_KEY:-}
+      POSTHOG_HOST: ${POSTHOG_HOST:-https://app.posthog.com}
+      NEXT_PUBLIC_TELEMETRY_ENABLED: ${TELEMETRY_ENABLED:-false}
+      NEXT_PUBLIC_USER_UUID: ${USER_UUID:-}
+      NEXT_PUBLIC_POSTHOG_API_KEY: ${POSTHOG_API_KEY:-}
+      NEXT_PUBLIC_POSTHOG_HOST: ${POSTHOG_HOST:-https://app.posthog.com}
+    ports:
+      - ${HOST_PORT:-3000}:3000
+    volumes:
+      - data:/app/data
+    networks:
+      - wren
+    depends_on:
+      - wren-ai-service
+      - wren-engine
