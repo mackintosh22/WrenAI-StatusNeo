@@ -9,7 +9,7 @@ and the workspace behind **Launch Wren AI** (`/launch`).
 OPENAI_API_KEY=sk-... ./run.sh # non-interactive
 ./run.sh logs wren-ui | status | down | rebuild | reset
 ```
-Open http://localhost:3000 (change with `HOST_PORT`). Requires Docker + Compose v2
+Open http://localhost:3001 (change with `HOST_PORT`). Requires Docker + Compose v2
 and ~8 GB RAM for the first UI build.
 
 Files: `docker/docker-compose-local.yml`, `docker/.env.local.example`, `run.sh`.
